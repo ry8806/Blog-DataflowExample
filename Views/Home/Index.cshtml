@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div>
+        <p>What is the best colour?</p>
+        Answer: <input id="answer" type="text" />
+        Your Email: <input id="email" type="email" />
+    </div>
+    <br />
+    <div>
+        <button id="submit" type="submit">Submit</button>
+    </div>
+</div>
+
+<script>
+    // Really simple JS code that should never be in a production application
+
+    // Get the values from the inputs
+    const answer = document.getElementById("answer");
+    const email = document.getElementById("email");
+
+    const submitButton = document.getElementById("submit");
+
+    // On Submit button click...
+    submitButton.onclick = function () {
+        $.ajax("/enter", {
+            data: JSON.stringify({ answer: answer.value, email: email.value }),
+            contentType: "application/json",
+            type: "POST"
+        }).done(function () {
+            alert("Successfully entered competition!");
+        });
+    };
+</script>
